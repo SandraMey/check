@@ -20,10 +20,13 @@ const insertAlbums = ({
 
 const updateAlbums = (object, id) => connexion.promise().query('UPDATE albums SET ? WHERE id = ?', [object, id]);
 
+const deleteAlbums = (id) => connexion.promise().query('DELETE FROM albums WHERE id = ?', [id]);
+
 module.exports = {
     findAllAlbums,
     findOneAlbumsById,
     findTracksById,
     insertAlbums,
-    updateAlbums
+    updateAlbums,
+    deleteAlbums
 }
