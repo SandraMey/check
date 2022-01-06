@@ -1,5 +1,5 @@
 const albumsRouter = require('express').Router();
-const { findAllAlbums } = require('../models/albums');
+const { findAllAlbums, findOneAlbumsById } = require('../models/albums');
 
 albumsRouter.get('/', async (req, res) => {
     const [albums] = await findAllAlbums()
@@ -8,6 +8,13 @@ albumsRouter.get('/', async (req, res) => {
     } else {
         res.status(404).json();
     }
+});
+
+albumsRouter.get('/:id', async (req, res) => {
+    const [[albums]] = await findOneAlbumsById(req.params.id);
+    if (albums) {
+        res.json(albums);
+    } res.status(404).json();
 });
 
 module.exports = albumsRouter;
