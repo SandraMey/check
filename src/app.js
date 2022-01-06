@@ -1,14 +1,16 @@
-require('dotenv').config();
 const express = require('express');
-const tracksRouter = require('./routes/tracks');
-const albumsRouter = require('./routes/albums');
+const setupRoutes = require('./routes/indexRouter');
+
+
+require('dotenv').config();
+
 
 const app = express();
 
+
 app.use(express.json());
 
-app.use('./api/tracks', tracksRouter);
-app.use('./api/albums', albumsRouter);
+setupRoutes(app);
 
 // Please keep this module.exports app, we need it for the tests !
 module.exports = app;

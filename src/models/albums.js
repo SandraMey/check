@@ -1,32 +1,34 @@
-const connexion = require('../connexion');
+const connection = require('../config/db-config');
+const db = connection.promise();
 
-const findAllAlbums = () => connexion.promise().query('SELECT * FROM albums');
 
-const findOneAlbumsById = (id) => connexion.promise().query('SELECT * FROM albums WHERE id = ?', [id]);
+const findAllAlbums = () => db.query('SELECT * FROM albums');
 
-const findTracksById = (id) => connexion.promise().query('SELECT * FROM track WHERE id_album = ?', [id]);
+const findOneAlbumsById = (id) =>
+  dataBase.query('SELECT * FROM albums WHERE id = ?', [id]);
 
-const insertAlbums = ({
+const findAllTracksFromAlbum = () => 
+  dataBase.query('SELECT * FROM tracks inner join albums on  albums.id = tracks.id_album')
+
+const insertAlbum = ({ title,genre,picture,artist}) =>
+  dataBase.query('INSERT INTO albums (title,genre,picture,artist) VALUES (?, ?, ?,?)', [
     title,
     genre,
     picture,
-    artist
-}) => connexion.promise().query('INSERT INTO albums (title, genre, picture, artist) VALUES (?, ?, ?, ?)',[
-    title,
-    genre,
-    picture,
-    artist
-]);
+    artist,
+  ]);
 
-const updateAlbums = (object, id) => connexion.promise().query('UPDATE albums SET ? WHERE id = ?', [object, id]);
+const deleteAlbum = (id) =>
+  dataBase.query('DELETE FROM albums WHERE id = ?', [id]);
 
-const deleteAlbums = (id) => connexion.promise().query('DELETE FROM albums WHERE id = ?', [id]);
+const updateAlbum = (object, id) =>
+  dataBase.query('UPDATE albums SET ? WHERE id = ?', [object, id]);
 
 module.exports = {
-    findAllAlbums,
-    findOneAlbumsById,
-    findTracksById,
-    insertAlbums,
-    updateAlbums,
-    deleteAlbums
-}
+  findAllAlbums,
+  findOneAlbumsById ,
+  insertAlbum,
+  deleteAlbum,
+  updateAlbum,
+  findAllTracksFromAlbum,
+};

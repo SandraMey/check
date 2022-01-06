@@ -1,22 +1,23 @@
-const connexion = require('../connexion');
+const connection = require('../config/db-config');
+const db = connection.promise();
 
-const findAll = () => connexion.promise().query('SELECT * FROM tracks');
+const findAll = () => db.query('SELECT * FROM tracks');
 
-const findOneById = (id) => connexion.promise().query('SELECT * FROM tracks WHERE id = ?', [id]);
+const findOneById = (id) => db.query('SELECT * FROM tracks WHERE id = ?', [id]);
 
 const insertTracks = ({
     title,
     youtube_url,
     id_album
-}) => connexion.promise().query('INSERT INTO tracks (title, youtube_url, id_album) VALUES (?, ?, ?)',[
+}) => db.query('INSERT INTO tracks (title, youtube_url, id_album) VALUES (?, ?, ?)',[
     title,
     youtube_url,
     id_album
 ]);
 
-const updateTracks = (object, id) => connexion.promise().query('UPDATE tracks SET ? WHERE id = ?', [object, id]);
+const updateTracks = (object, id) => db.query('UPDATE tracks SET ? WHERE id = ?', [object, id]);
 
-const deleteTracks = (id) => connexion.promise().query('DELETE FROM tracks WHERE id = ?', [id]);
+const deleteTracks = (id) => db.query('DELETE FROM tracks WHERE id = ?', [id]);
 
 module.exports = {
     findAll,
