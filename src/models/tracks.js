@@ -10,10 +10,13 @@ const insertTracks = ({
 }, id_album) => connexion.promise().query('INSERT INTO tracks (title, youtube_url) VALUES (?, ?)',[
     title,
     youtube_url
-])
+]);
+
+const updateTracks = (object, id) => connexion.promise().query('UPDATE tracks SET ? WHERE id = ?', [object, id]);
 
 module.exports = {
     findAll,
     findOneById,
-    insertTracks
+    insertTracks,
+    updateTracks
 }

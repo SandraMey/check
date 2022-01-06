@@ -1,5 +1,5 @@
 const tracksRouter = require('express').Router();
-const { findAll, findOneById, insertTracks } = require('../models/tracks');
+const { findAll, findOneById, insertTracks, updateTracks } = require('../models/tracks');
 
 tracksRouter.get('/', async (req, res) => {
     const [[tracks]] = await findAll()
@@ -23,5 +23,10 @@ tracksRouter.post('/', async (req, res) => {
         ...newTracks
     }, id_album);
 });
+
+tracksRouter.put('/:id', async (req, res) => {
+    await updateTracks(req.body, req.params.id)
+    res.status(204).json();
+})
 
 module.export = tracksRouter;
