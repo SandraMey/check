@@ -11,16 +11,19 @@ const insertAlbums = ({
     genre,
     picture,
     artist
-}) => connexion.promise().query('INSERT INTO tracks (title, genre, picture, artist) VALUES (?, ?, ?, ?)',[
+}) => connexion.promise().query('INSERT INTO albums (title, genre, picture, artist) VALUES (?, ?, ?, ?)',[
     title,
     genre,
     picture,
     artist
 ]);
 
+const updateAlbums = (object, id) => connexion.promise().query('UPDATE albums SET ? WHERE id = ?', [object, id]);
+
 module.exports = {
     findAllAlbums,
     findOneAlbumsById,
     findTracksById,
-    insertAlbums
+    insertAlbums,
+    updateAlbums
 }
