@@ -2,10 +2,12 @@ const tracksRouter = require('express').Router();
 const { findAll, findOneById, insertTracks, updateTracks, deleteTracks } = require('../models/tracks');
 
 tracksRouter.get('/', async (req, res) => {
-    const [[tracks]] = await findAll()
-        .then(([tracks]) => {
-            res.json(tracks)
-        })
+    const [track] = await findAll()
+    if (track) {
+        res.json(tracks)
+    } else {
+        res.status(404).json();
+    }
 });
 
 tracksRouter.get('/:id', async (req, res) => {
@@ -21,7 +23,7 @@ tracksRouter.post('/', async (req, res) => {
     res.status(201).json({
         id,
         ...newTracks
-    }, id_album);
+    });
 });
 
 tracksRouter.put('/:id', async (req, res) => {
@@ -34,4 +36,4 @@ tracksRouter.delete('/:id', async (req, res) => {
     res.status(204).json();
 })
 
-module.export = tracksRouter;
+module.exports = tracksRouter;

@@ -6,10 +6,12 @@ const findOneById = (id) => connexion.promise().query('SELECT * FROM tracks WHER
 
 const insertTracks = ({
     title,
-    youtube_url
-}, id_album) => connexion.promise().query('INSERT INTO tracks (title, youtube_url) VALUES (?, ?)',[
+    youtube_url,
+    id_album
+}) => connexion.promise().query('INSERT INTO tracks (title, youtube_url, id_album) VALUES (?, ?, ?)',[
     title,
-    youtube_url
+    youtube_url,
+    id_album
 ]);
 
 const updateTracks = (object, id) => connexion.promise().query('UPDATE tracks SET ? WHERE id = ?', [object, id]);
