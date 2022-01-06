@@ -19,7 +19,12 @@ CREATE TABLE `tracks` (
 );
 
 INSERT INTO tracks 
-(title, youtube_url)
+(title, youtube_url, id_album)
 VALUES 
-('Dua Lipa', 'https://www.youtube.com/watch?v=AFHzbgmcBDw');
+('Another Brick In The Wall', 'https://www.youtube.com/watch?v=YR5ApYxkU-U', 1);
+
+INSERT INTO albums 
+(title, genre, picture, artist)
+VALUES 
+('The Dark Side of the Moon','Rock', 'https://images-na.ssl-images-amazon.com/images/I/41QfcId32%2BL._SY355_.jpg', 'Pink Floyd');
 
