@@ -14,9 +14,12 @@ const insertTracks = ({
 
 const updateTracks = (object, id) => connexion.promise().query('UPDATE tracks SET ? WHERE id = ?', [object, id]);
 
+const deleteTracks = (id) => connexion.promise().query('DELETE FROM tracks WHERE id = ?', [id]);
+
 module.exports = {
     findAll,
     findOneById,
     insertTracks,
-    updateTracks
+    updateTracks,
+    deleteTracks
 }
